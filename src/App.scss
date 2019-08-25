@@ -1,13 +1,34 @@
 @import url('https://fonts.googleapis.com/css?family=Monoton|Roboto');
 @import url('https://fonts.googleapis.com/css?family=Plaster');
 @import url('https://fonts.googleapis.com/css?family=Cute+Font');
+@import url('https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap');
 
-/*color variables*/
-$bg-one: #93F9B9;
-$bg-two: #1D976C;
-$primary: #FFFFFF;
-$secondary: #712D9E;
-$tertiary: #D2B0E8;
+//code for setting up a theme
+@mixin theme($primary, $secondary, $tertiary, $bg-one, $bg-two) {
+  background: $bg-two;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, $bg-one, $bg-two);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, $bg-one, $bg-two); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: $primary;
+
+  button {
+    color: $primary;
+    &:hover {
+      color:$tertiary;
+    }
+  }
+  #root #pomodoro #session, #root #pomodoro #break {
+    color: $primary;
+  }
+  #root #pomodoro #timer {
+    #header, #header2 {
+      color: $primary;
+    }
+    #time-left {
+      color: $secondary;
+    }
+  }
+}
+
 
 * {
   box-sizing: border-box;
@@ -19,10 +40,10 @@ html, body {
 }
 
 body {
-  background: $bg-two;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, $bg-one, $bg-two);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, $bg-one, $bg-two); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
-  color: $primary;
+  //background: $bg-two;  /* fallback for old browsers */
+  //background: -webkit-linear-gradient(to bottom, $bg-one, $bg-two);  /* Chrome 10-25, Safari 5.1-6 */
+  //background: linear-gradient(to bottom, $bg-one, $bg-two); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  //color: $primary;
   background-repeat: no-repeat;
   height: 100vh;
   width:100vw;
@@ -48,7 +69,7 @@ body {
                          ". dec time inc .";
     grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
     grid-template-rows: 1fr, 1fr; 
-    color: $primary;
+    //color: $primary;
 
     label {
       grid-area: label;
@@ -80,7 +101,7 @@ body {
       text-align: left;
       font-size: 60px;
       font-family: "Plaster", sans-serif;
-      color: $primary;
+      //color: $primary;
       grid-area: header;
       margin-right: 30px;
     }
@@ -89,7 +110,7 @@ body {
       text-align: right;
       font-size: 60px;
       font-family: "Plaster", sans-serif;
-      color: $primary;
+      //color: $primary;
       grid-area: header2;
       margin-left: 30px;
     }
@@ -97,7 +118,7 @@ body {
     #time-left {
       grid-area: time;
       margin: auto;
-      color: $secondary;
+      //color: $secondary;
   
         button {
           width: 50%;
@@ -129,7 +150,7 @@ body {
 /*all buttons have these properties*/
 button {
   background: none;
-	color: $primary;
+	//color: $primary;
 	border: none;
 	padding: 0px;
 	font: inherit;
@@ -139,19 +160,21 @@ button {
   transition: color 200ms;
 
   &:hover {
-    color: $tertiary;
+    //color: $tertiary;
     font-size: 28px;
   } 
 }
 
 /*timer label blinking*/
+
 @keyframes blinking {
-  0% { color: $tertiary;}
+  0% { color: #FFF;}
   30% {color: transparent;}
   50% {color: transparent;}
   90% {color: transparent;}
-  100% {color: $tertiary;}
+  100% {color: #FFF;}
 }
+
 /*initial blinking params*/
 @keyframes blinking2 {
   0% { color:  transparent;}
@@ -193,3 +216,38 @@ button {
     }
   }
 }
+//three buttons to select theme
+#theme-selection {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 5px;
+      &:hover {
+        width: 12px;
+        height: 12px;
+      }
+  }
+}
+
+//toggle themes
+.third {
+  @include theme(white,#430000,#d6be57, #e43a15, #dc2430);
+}
+.second {
+  @include theme(#070107, #4f0f36, #336611, #FFF, #fbffc2);
+  background: url("https://images.unsplash.com/photo-1557445796-184d83fc49b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80");
+  background-size: cover;
+}
+.initial{
+  @include theme(#FFFFFF, #712D9E, #D2B0E8, #93F9B9, #1D976C);
+
+}
+
+
+ 

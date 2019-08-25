@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Monoton|Roboto");
 @import url("https://fonts.googleapis.com/css?family=Plaster");
 @import url("https://fonts.googleapis.com/css?family=Cute+Font");
-/*color variables*/
+@import url("https://fonts.googleapis.com/css?family=Bungee+Shade&display=swap");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -13,13 +13,6 @@ html, body {
 }
 
 body {
-  background: #1D976C;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, left bottom, from(#93F9B9), to(#1D976C));
-  background: linear-gradient(to bottom, #93F9B9, #1D976C);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: #FFFFFF;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
@@ -52,7 +45,6 @@ body {
       grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
   -ms-grid-rows: 1fr, 1fr;
       grid-template-rows: 1fr, 1fr;
-  color: #FFFFFF;
 }
 
 #pomodoro #session label, #pomodoro #break label {
@@ -106,7 +98,6 @@ body {
   text-align: left;
   font-size: 60px;
   font-family: "Plaster", sans-serif;
-  color: #FFFFFF;
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: header;
@@ -117,7 +108,6 @@ body {
   text-align: right;
   font-size: 60px;
   font-family: "Plaster", sans-serif;
-  color: #FFFFFF;
   -ms-grid-row: 1;
   -ms-grid-column: 3;
   grid-area: header2;
@@ -129,7 +119,6 @@ body {
   -ms-grid-column: 2;
   grid-area: time;
   margin: auto;
-  color: #712D9E;
 }
 
 #pomodoro #timer #time-left button {
@@ -160,7 +149,6 @@ body {
 /*all buttons have these properties*/
 button {
   background: none;
-  color: #FFFFFF;
   border: none;
   padding: 0px;
   font: inherit;
@@ -172,14 +160,13 @@ button {
 }
 
 button:hover {
-  color: #D2B0E8;
   font-size: 28px;
 }
 
 /*timer label blinking*/
 @-webkit-keyframes blinking {
   0% {
-    color: #D2B0E8;
+    color: #FFF;
   }
   30% {
     color: transparent;
@@ -191,12 +178,12 @@ button:hover {
     color: transparent;
   }
   100% {
-    color: #D2B0E8;
+    color: #FFF;
   }
 }
 @keyframes blinking {
   0% {
-    color: #D2B0E8;
+    color: #FFF;
   }
   30% {
     color: transparent;
@@ -208,7 +195,7 @@ button:hover {
     color: transparent;
   }
   100% {
-    color: #D2B0E8;
+    color: #FFF;
   }
 }
 
@@ -265,5 +252,117 @@ button:hover {
     margin-top: -90px;
     padding: 0px;
   }
+}
+
+#theme-selection {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+}
+
+#theme-selection button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 5px;
+}
+
+#theme-selection button:hover {
+  width: 12px;
+  height: 12px;
+}
+
+.third {
+  background: #dc2430;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, left bottom, from(#e43a15), to(#dc2430));
+  background: linear-gradient(to bottom, #e43a15, #dc2430);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+}
+
+.third button {
+  color: white;
+}
+
+.third button:hover {
+  color: #d6be57;
+}
+
+.third #root #pomodoro #session, .third #root #pomodoro #break {
+  color: white;
+}
+
+.third #root #pomodoro #timer #header, .third #root #pomodoro #timer #header2 {
+  color: white;
+}
+
+.third #root #pomodoro #timer #time-left {
+  color: #430000;
+}
+
+.second {
+  background: #fbffc2;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#fbffc2));
+  background: linear-gradient(to bottom, #FFF, #fbffc2);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #070107;
+  background: url("https://images.unsplash.com/photo-1557445796-184d83fc49b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80");
+  background-size: cover;
+}
+
+.second button {
+  color: #070107;
+}
+
+.second button:hover {
+  color: #336611;
+}
+
+.second #root #pomodoro #session, .second #root #pomodoro #break {
+  color: #070107;
+}
+
+.second #root #pomodoro #timer #header, .second #root #pomodoro #timer #header2 {
+  color: #070107;
+}
+
+.second #root #pomodoro #timer #time-left {
+  color: #4f0f36;
+}
+
+.initial {
+  background: #1D976C;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, left bottom, from(#93F9B9), to(#1D976C));
+  background: linear-gradient(to bottom, #93F9B9, #1D976C);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #FFFFFF;
+}
+
+.initial button {
+  color: #FFFFFF;
+}
+
+.initial button:hover {
+  color: #D2B0E8;
+}
+
+.initial #root #pomodoro #session, .initial #root #pomodoro #break {
+  color: #FFFFFF;
+}
+
+.initial #root #pomodoro #timer #header, .initial #root #pomodoro #timer #header2 {
+  color: #FFFFFF;
+}
+
+.initial #root #pomodoro #timer #time-left {
+  color: #712D9E;
 }
 /*# sourceMappingURL=App.css.map */
