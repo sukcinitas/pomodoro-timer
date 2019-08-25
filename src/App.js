@@ -153,15 +153,15 @@ class App extends React.Component {
       <div id="pomodoro" style={{}}>
         <div id="session" style={this.state.styles}>
           <label id="session-label">session length</label>
-          <button id="session-decrement" onClick={this.sessionDec}><i className="fas fa-caret-down"></i></button>
-          <span id="session-length">{this.state.session}</span>
-          <button id="session-increment" onClick={this.sessionInc}><i className="fas fa-caret-up"></i></button>
+          <button class="decrement" onClick={this.sessionDec}><i className="fas fa-caret-down"></i></button>
+          <span class="length">{this.state.session}</span>
+          <button class="increment" onClick={this.sessionInc}><i className="fas fa-caret-up"></i></button>
         </div>
         <div id="break" style={this.state.styles}>
           <label id="break-label">break length</label>
-          <button id="break-decrement" onClick={this.breakDec}><i className="fas fa-caret-down"></i></button>
-          <span id="break-length">{this.state.break}</span>
-          <button id="break-increment" onClick={this.breakInc}><i className="fas fa-caret-up"></i></button> 
+          <button class="decrement" onClick={this.breakDec}><i className="fas fa-caret-down"></i></button>
+          <span class="length">{this.state.break}</span>
+          <button class="increment" onClick={this.breakInc}><i className="fas fa-caret-up"></i></button> 
         </div>
         <div id="timer">
           <h1 id="header">Pomodoro</h1>

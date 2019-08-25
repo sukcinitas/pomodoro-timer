@@ -1,34 +1,34 @@
-//
 @import url('https://fonts.googleapis.com/css?family=Monoton|Roboto');
 @import url('https://fonts.googleapis.com/css?family=Plaster');
 @import url('https://fonts.googleapis.com/css?family=Cute+Font');
 
-$background-one: #93F9B9;
-$background-two: #1D976C;
-$main: rgb(255,255,255);
+/*color variables*/
+$bg-one: #93F9B9;
+$bg-two: #1D976C;
+$primary: #FFFFFF;
+$secondary: #712D9E;
+$tertiary: #D2B0E8;
 
 * {
   box-sizing: border-box;
 }
+
 html, body {
   padding: 0;
   margin: 0 auto;
 }
 
 body {
- 
-background: #1D976C;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-  
-  color: white;
+  background: $bg-two;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, $bg-one, $bg-two);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, $bg-one, $bg-two); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  color: $primary;
   background-repeat: no-repeat;
   height: 100vh;
   width:100vw;
   overflow: auto;
 }
+/*pomodoro grid consists of three grid areas: timer, session, break*/
 #pomodoro{
   margin: auto;
   margin-top: 150px;
@@ -36,63 +36,100 @@ background: linear-gradient(to bottom, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, 
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr 1fr;
+
+  #session, #break, #timer {
+    font-family:"Cute Font", sans-serif;
+    font-size: 30px;
+  }
+
+  #session, #break {
+    display: grid;
+    grid-template-areas: "label label label label label"
+                         ". dec time inc .";
+    grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
+    grid-template-rows: 1fr, 1fr; 
+    color: $primary;
+
+    label {
+      grid-area: label;
+      text-align: center;
+    }
+    .decrement{
+      grid-area: dec;
+    }
+    .length {
+      grid-area: time;
+      font-size: 28px;
+      margin: auto;
+      padding: 0;
+    }
+    .increment {
+      grid-area: inc;
+    }
+  }
+
+  #timer {
+    grid-area: 1 / 1 / span 1 / span 2; /* fills full first row out of two in pomodoro grid*/
+    margin: auto;
+    display: grid; /* grid is needed for two headers to come side by side at smaller screens*/
+    grid-template-rows: auto auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: "header time header2";
+            
+    #header {
+      text-align: left;
+      font-size: 60px;
+      font-family: "Plaster", sans-serif;
+      color: $primary;
+      grid-area: header;
+      margin-right: 30px;
+    }
+  
+    #header2 {
+      text-align: right;
+      font-size: 60px;
+      font-family: "Plaster", sans-serif;
+      color: $primary;
+      grid-area: header2;
+      margin-left: 30px;
+    }
+  
+    #time-left {
+      grid-area: time;
+      margin: auto;
+      color: $secondary;
+  
+        button {
+          width: 50%;
+        }
+
+        p {
+          text-align: center
+        }
+
+        #time-left-label {
+          text-align: center;
+          margin: auto;
+          margin-top: 30px;
+          font-size: 150px;
+        } 
+  
+       #timer-label {
+          font-size: 100px;
+          margin-bottom: 20px;
+          animation: blinking 3000ms ease-in-out infinite;
+          margin-top: -94px;
+          margin-right: -150px;
+          z-index: -99;
+        }
+    } 
+  }
 }
 
-#header {
-  text-align: left;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  grid-area: header;
-  margin-right: 30px;
-}
-#header2 {
-  text-align: right;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  grid-area: header2;
-  margin-left: 30px;
-}
-
-#timer {
-  grid-area: 1 / 1 / 1 / span 2;
-  margin: auto;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-rows: 1fr;
-  grid-template-areas: "header time header2"
-                      
-}
-#session, #break, #timer {
-  font-family:"Cute Font", sans-serif;
-  font-size: 30px;
-}
-#session, #break {
-  display: grid;
-  grid-template-areas: "label label label label label"
-                       ". dec time inc .";
-  grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
-  grid-template-rows: 3fr 3fr; 
-  color: white;
-}
-#session-label, #break-label {
-  grid-area: label;
-  text-align: center;
-}
-#session-decrement, #break-decrement{
-  grid-area: dec;
-}
-#session-length, #break-length {
-  grid-area: time;
-  font-size: 25px;
-}
-#session-increment, #break-increment {
-  grid-area: inc;
-}
+/*all buttons have these properties*/
 button {
   background: none;
-	color: white;
+	color: $primary;
 	border: none;
 	padding: 0px;
 	font: inherit;
@@ -100,54 +137,25 @@ button {
 	outline: inherit;
   font-size: 25px;
   transition: color 200ms;
-}
-button:hover {
-  color: #D2B0E8;
-  font-size: 28px;
-}
-span {
-  margin: auto;
-  padding: 0;
-}
-p {
-  text-align: center
+
+  &:hover {
+    color: $tertiary;
+    font-size: 28px;
+  } 
 }
 
-#time-left {
-  grid-area: time;
-  margin: auto;
-  color: #712D9E;
-}
-#time-left button {
-  width: 50%;
-}
-#time-left-label {
-  text-align: center;
-  margin: auto;
-  margin-top: 30px;
-  font-size: 140px;
-}
-
+/*timer label blinking*/
 @keyframes blinking {
-  0% { color: #D2B0E8;}
+  0% { color: $tertiary;}
   30% {color: transparent;}
   50% {color: transparent;}
   90% {color: transparent;}
-  100% {color: #D2B0E8;}
+  100% {color: $tertiary;}
 }
+/*initial blinking params*/
 @keyframes blinking2 {
   0% { color:  transparent;}
   100% {color: transparent;}
-}
-#timer-label {
-  font-size: 100px;
-  margin-bottom: 20px;
-  /*
-  animation: blinking 3000ms ease-in-out infinite;
-  */
-  margin-top: -94px;
-  margin-right: -150px;
-  z-index: -99;
 }
 
 @media (max-width: 970px) {
@@ -155,32 +163,33 @@ p {
     grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr;
     margin-top: 20px;
-  }
-  #timer {
+
+    #timer {
     grid-template-rows: auto auto auto;
     grid-template-rows: 1fr;
-    grid-template-areas: "header" 
-                         "header2" 
-                         "time"
+    grid-template-areas: "header" "header2" "time";
+
+      #header, #header2 {
+        font-size: 45px;
+        text-align: center;
+        margin: 0;
+      }
+    }
+
+    #session, #break {
+      width: 100%;
+      margin: 0;
+      margin-top: 20px;
+      grid-template-columns: 4fr 1fr 1fr 1fr 4fr;
+    }
   }
-  #header, #header2 {
-    font-size: 45px;
-    text-align: center;
-    margin: 0;
-  }
-  #session, #break {
-    width: 100%;
-    margin: 0;
-    margin-top: 20px;
-    grid-template-columns: 4fr 1fr 1fr 1fr 4fr;
-  }
+  
   #time-left {
     margin-top: 30px;
+    #timer-label {
+      margin: 0px;
+      margin-top: -90px;
+      padding: 0px;
+    }
   }
-  #timer-label {
-    margin: 0px;
-    margin-top: -90px;
-    padding: 0px;
-  }
-
 }

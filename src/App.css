@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Monoton|Roboto");
 @import url("https://fonts.googleapis.com/css?family=Plaster");
 @import url("https://fonts.googleapis.com/css?family=Cute+Font");
+/*color variables*/
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -18,13 +19,14 @@ body {
   background: -webkit-gradient(linear, left top, left bottom, from(#93F9B9), to(#1D976C));
   background: linear-gradient(to bottom, #93F9B9, #1D976C);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  color: white;
+  color: #FFFFFF;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
   overflow: auto;
 }
 
+/*pomodoro grid consists of three grid areas: timer, session, break*/
 #pomodoro {
   margin: auto;
   margin-top: 150px;
@@ -37,60 +39,23 @@ body {
       grid-template-columns: 1fr 1fr;
 }
 
-#header {
-  text-align: left;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  grid-area: header;
-  margin-right: 30px;
-}
-
-#header2 {
-  text-align: right;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  -ms-grid-row: 1;
-  -ms-grid-column: 3;
-  grid-area: header2;
-  margin-left: 30px;
-}
-
-#timer {
-  -ms-grid-row: 1;
-  -ms-grid-column: 1;
-  -ms-grid-column-span: 2;
-  grid-area: 1 / 1 / 1 / span 2;
-  margin: auto;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: auto auto;
-      grid-template-rows: auto auto;
-  -ms-grid-rows: 1fr;
-      grid-template-rows: 1fr;
-      grid-template-areas: "header time header2";
-}
-
-#session, #break, #timer {
+#pomodoro #session, #pomodoro #break, #pomodoro #timer {
   font-family: "Cute Font", sans-serif;
   font-size: 30px;
 }
 
-#session, #break {
+#pomodoro #session, #pomodoro #break {
   display: -ms-grid;
   display: grid;
       grid-template-areas: "label label label label label" ". dec time inc .";
   -ms-grid-columns: 7fr 1fr 1fr 1fr 7fr;
       grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
-  -ms-grid-rows: 3fr 3fr;
-      grid-template-rows: 3fr 3fr;
-  color: white;
+  -ms-grid-rows: 1fr, 1fr;
+      grid-template-rows: 1fr, 1fr;
+  color: #FFFFFF;
 }
 
-#session-label, #break-label {
+#pomodoro #session label, #pomodoro #break label {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   -ms-grid-column-span: 5;
@@ -98,28 +63,104 @@ body {
   text-align: center;
 }
 
-#session-decrement, #break-decrement {
+#pomodoro #session .decrement, #pomodoro #break .decrement {
   -ms-grid-row: 2;
   -ms-grid-column: 2;
   grid-area: dec;
 }
 
-#session-length, #break-length {
-  -ms-grid-row: 2;
-  -ms-grid-column: 3;
+#pomodoro #session .length, #pomodoro #break .length {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
   grid-area: time;
-  font-size: 25px;
+  font-size: 28px;
+  margin: auto;
+  padding: 0;
 }
 
-#session-increment, #break-increment {
+#pomodoro #session .increment, #pomodoro #break .increment {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
   grid-area: inc;
 }
 
+#pomodoro #timer {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: 1 / 1 / span 1 / span 2;
+  /* fills full first row out of two in pomodoro grid*/
+  margin: auto;
+  display: -ms-grid;
+  display: grid;
+  /* grid is needed for two headers to come side by side at smaller screens*/
+  -ms-grid-rows: auto auto;
+      grid-template-rows: auto auto;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: "header time header2";
+}
+
+#pomodoro #timer #header {
+  text-align: left;
+  font-size: 60px;
+  font-family: "Plaster", sans-serif;
+  color: #FFFFFF;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+  margin-right: 30px;
+}
+
+#pomodoro #timer #header2 {
+  text-align: right;
+  font-size: 60px;
+  font-family: "Plaster", sans-serif;
+  color: #FFFFFF;
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: header2;
+  margin-left: 30px;
+}
+
+#pomodoro #timer #time-left {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: time;
+  margin: auto;
+  color: #712D9E;
+}
+
+#pomodoro #timer #time-left button {
+  width: 50%;
+}
+
+#pomodoro #timer #time-left p {
+  text-align: center;
+}
+
+#pomodoro #timer #time-left #time-left-label {
+  text-align: center;
+  margin: auto;
+  margin-top: 30px;
+  font-size: 150px;
+}
+
+#pomodoro #timer #time-left #timer-label {
+  font-size: 100px;
+  margin-bottom: 20px;
+  -webkit-animation: blinking 3000ms ease-in-out infinite;
+          animation: blinking 3000ms ease-in-out infinite;
+  margin-top: -94px;
+  margin-right: -150px;
+  z-index: -99;
+}
+
+/*all buttons have these properties*/
 button {
   background: none;
-  color: white;
+  color: #FFFFFF;
   border: none;
   padding: 0px;
   font: inherit;
@@ -135,34 +176,7 @@ button:hover {
   font-size: 28px;
 }
 
-span {
-  margin: auto;
-  padding: 0;
-}
-
-p {
-  text-align: center;
-}
-
-#time-left {
-  -ms-grid-row: 2;
-  -ms-grid-column: 3;
-  grid-area: time;
-  margin: auto;
-  color: #712D9E;
-}
-
-#time-left button {
-  width: 50%;
-}
-
-#time-left-label {
-  text-align: center;
-  margin: auto;
-  margin-top: 30px;
-  font-size: 140px;
-}
-
+/*timer label blinking*/
 @-webkit-keyframes blinking {
   0% {
     color: #D2B0E8;
@@ -180,7 +194,6 @@ p {
     color: #D2B0E8;
   }
 }
-
 @keyframes blinking {
   0% {
     color: #D2B0E8;
@@ -199,6 +212,7 @@ p {
   }
 }
 
+/*initial blinking params*/
 @-webkit-keyframes blinking2 {
   0% {
     color: transparent;
@@ -207,7 +221,6 @@ p {
     color: transparent;
   }
 }
-
 @keyframes blinking2 {
   0% {
     color: transparent;
@@ -215,17 +228,6 @@ p {
   100% {
     color: transparent;
   }
-}
-
-#timer-label {
-  font-size: 100px;
-  margin-bottom: 20px;
-  /*
-  animation: blinking 3000ms ease-in-out infinite;
-  */
-  margin-top: -94px;
-  margin-right: -150px;
-  z-index: -99;
 }
 
 @media (max-width: 970px) {
@@ -236,19 +238,19 @@ p {
         grid-template-columns: 1fr 1fr;
     margin-top: 20px;
   }
-  #timer {
+  #pomodoro #timer {
     -ms-grid-rows: auto auto auto;
         grid-template-rows: auto auto auto;
     -ms-grid-rows: 1fr;
         grid-template-rows: 1fr;
-        grid-template-areas: "header"  "header2"  "time";
+        grid-template-areas: "header" "header2" "time";
   }
-  #header, #header2 {
+  #pomodoro #timer #header, #pomodoro #timer #header2 {
     font-size: 45px;
     text-align: center;
     margin: 0;
   }
-  #session, #break {
+  #pomodoro #session, #pomodoro #break {
     width: 100%;
     margin: 0;
     margin-top: 20px;
@@ -258,7 +260,7 @@ p {
   #time-left {
     margin-top: 30px;
   }
-  #timer-label {
+  #time-left #timer-label {
     margin: 0px;
     margin-top: -90px;
     padding: 0px;
