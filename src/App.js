@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 //setting initial theme
 const body = document.getElementsByTagName("BODY")[0];
@@ -42,7 +42,7 @@ class App extends React.Component {
     this.setTheme = this.setTheme.bind(this);
   }
   
-  sessionInc() {
+  sessionInc(e) {
     //clearInterval(this.interval);
     //max session length is 60 minutes
     if (this.state.session === 60) {
@@ -149,7 +149,6 @@ class App extends React.Component {
   }
 
   setTheme(e) {
-    console.log(e.target);
     body.classList.remove(this.state.theme);
     this.setState ({
       theme: e.target.dataset.theme
@@ -176,9 +175,7 @@ class App extends React.Component {
         </div>
 
         <div id="timer">
-
           <h1 id="header">Pomodoro</h1>
-
           <div id="time-left">
             <p id="time-left-label">{makeTime(this.state.seconds)}</p>
             <p id="timer-label" style={this.state.animation}>{this.state.timerLabel}</p>
@@ -187,15 +184,15 @@ class App extends React.Component {
             <audio id="beep"><source src="http://filmsound.org/starwars/wookie1.wav" />
             </audio>  
           </div>
-
           <h1 id="header2">Timer</h1>
-
         </div>
 
-        <div id="theme-selection">
+        <div id="theme-selection" onMouseOver={() => {document.querySelector("#tooltip").style.visibility = "visible"}}
+        onMouseOut={() => {document.querySelector("#tooltip").style.visibility = "hidden"}}>
             <button onClick={this.setTheme} data-theme="initial"></button>
             <button onClick={this.setTheme} data-theme="second"></button>
             <button onClick={this.setTheme} data-theme="third"></button>
+            <span id="tooltip">Select a theme</span>
         </div>
        </div> 
     )
