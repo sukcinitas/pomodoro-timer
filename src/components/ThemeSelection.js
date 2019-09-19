@@ -18,11 +18,11 @@ class ThemeSelection extends React.Component {
     render() {
         body.classList = `${this.props.theme}`;
         return (
-            <div id="theme-selection" onMouseOver={() => {document.querySelector("#tooltip").style.visibility = "visible"}} onMouseOut={() => {document.querySelector("#tooltip").style.visibility = "hidden"}}>
+            <div id="theme-selection">
+                <span id="tooltip">select a theme</span>
                 <button onClick={this.setTheme} data-theme="initial"></button>
                 <button onClick={this.setTheme} data-theme="second"></button>
                 <button onClick={this.setTheme} data-theme="third"></button>
-                <span id="tooltip">Select a theme</span>
             </div>  
         )
     }
