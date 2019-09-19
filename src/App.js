@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.scss';
-import ThemeSelection from './components/ThemeSelection';
 import Settings from './components/Settings';
 import Timer from './components/Timer';
 
@@ -12,7 +11,6 @@ class App extends React.Component {
   render() {
     return (
       <div id="pomodoro" style={{}}>
-        <ThemeSelection />
         <Settings />
         <Timer />
        </div> 

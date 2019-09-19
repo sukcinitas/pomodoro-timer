@@ -8,6 +8,7 @@ export const TOGGLE_SETTINGS_DISPLAY = 'TOGGLE_SETTING_DISPLAY';
 export const TOGGLE_GOING = 'TOGGLE_GOING';
 export const CHANGE_LABEL = 'CHANGE_LABEL';
 export const SET_SECONDS = 'SET_SECONDS';
+export const TOGGLE_PAUSE_SETTING = 'TOGGLE_PAUSE_SETTING';
 
 //action creators
 export const sessionInc = () => {
@@ -63,5 +64,11 @@ export const setSeconds = sec => {
     return {
         type: SET_SECONDS,
         sec
+    }
+}
+export const togglePauseSetting = (param) => {
+    return {
+        type: TOGGLE_PAUSE_SETTING,
+        param
     }
 }

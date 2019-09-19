@@ -1,8 +1,9 @@
-import {SESSION_INC, SESSION_DEC, PAUSE_INC, PAUSE_DEC, TOGGLE_SETTINGS_DISPLAY} from '../actions';
+import {SESSION_INC, SESSION_DEC, PAUSE_INC, PAUSE_DEC, TOGGLE_SETTINGS_DISPLAY, TOGGLE_PAUSE_SETTING} from '../actions';
 
 const initialState = {
     session: 25,
-    pause: 5
+    pause: 5,
+    pauseSetting: "enabled" 
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +23,9 @@ export default function(state = initialState, action) {
         case TOGGLE_SETTINGS_DISPLAY: {
             return Object.assign({}, state, {session: action.session,
                                              pause: action.pause})
+        }
+        case TOGGLE_PAUSE_SETTING: {
+            return Object.assign({}, state, {pauseSetting: action.param})
         }
         default:
             return state;

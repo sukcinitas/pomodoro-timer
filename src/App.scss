@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Plaster');
 @import url('https://fonts.googleapis.com/css?family=Cute+Font');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
+
 
 
 * {
@@ -28,49 +30,15 @@ body {
 
 #pomodoro{
   margin: auto;
-  // padding: 150px 10px;
-  padding-top: 100px; //
-  // max-width: 90%;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr 1fr;
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
 
-  #session, #break, #timer {
+  #timer {
     font-family:"Cute Font", sans-serif;
     font-size: 30px;
   }
-
-  #session, #break {
-    display: grid;
-    grid-template-areas: "label label label label label"
-                         ". dec time inc .";
-    grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
-    grid-template-rows: 1fr, 1fr; 
-///////////////////////////////////////////////////////////////////////////////////////
-    &.active {
-      display: "initial";
-    }
-    &.inactive {
-      display:none;
-    }
-//////////////////////////////////////////////////////////////////////
-    label {
-      grid-area: label;
-      text-align: center;
-    }
-    .decrement{
-      grid-area: dec;
-    }
-    .length {
-      grid-area: time;
-      font-size: 28px;
-      margin: auto;
-      padding: 0;
-    }
-    .increment {
-      grid-area: inc;
-    }
-  }
+  
 
   #timer {
     grid-area: 1 / 1 / span 1 / span 2; /* fills full first row out of two in pomodoro grid*/
@@ -129,6 +97,7 @@ body {
           margin-top: -94px;
           margin-right: -150px;
           z-index: -99;
+          color: white;
         }
     } 
   }
@@ -152,35 +121,7 @@ button {
   } 
 }
 
-/*==========Theme Selection Buttons==========
-===============================================*/
 
-#theme-selection {
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 10px;
-
-  #tooltip {
-    width: 1px;
-    font-size: 14px;
-    padding: 5px;
-    margin: 5px;
-    visibility: hidden;
-  }
-
-  button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    padding: 4px;
-    margin: 5px;
-
-      &:hover {
-        padding: 6px;
-      }
-  }
-}
 
 /*====================Animations=====================
 =======================================================*/
@@ -266,7 +207,7 @@ button {
     }
   }
   #root #pomodoro #session, #root #pomodoro #break {
-    color: $primary;
+    color: $bg-two;
   }
   #root #pomodoro #timer {
     #header, #header2 {
@@ -281,23 +222,136 @@ button {
     background-color: $primary;
   }
   #theme-selection button {
+    background-color: $secondary;
+  }
+  #settings {
+    &.active {
+      color: $secondary;
+    }
+  }
+  #options {
     background-color: $primary;
+    color: $bg-two;
+    h2 {
+      color: $secondary;
+    }
+    #session, #break{
+      button {
+        color: $bg-two;
+      }
+      .length {
+      border: 2px solid $secondary;
+      }
+    }
   }
 }
 
 
 .initial{
-  @include theme(#FFFFFF, #712D9E, #D2B0E8, #93F9B9, #1D976C);
+  @include theme(#FFFFFF, rgb(121, 63, 160), #D2B0E8, #93F9B9, #1D976C);
 
 }
 .second {
-  @include theme(#070107, #ffd900, #336611, #9abb4e, #57aa62);
+  @include theme(#070107, #ffd139, #336611, #9abb4e, #57aa62);
 }
 .third {
   @include theme(white,#d63f03,#d6be57, #667eea, #764ba2);
 }
 
+#settings {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 10px 15px;
+  font-size: 20px;
+  z-index: 20;
+}
+#options {
+  box-shadow: -1px 1px 20px black; 
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 100px;
+  font-family: "Open Sans", sans-serif;
+  display: none;
 
+  &.active {
+    display: block;
+  }
 
+  h2 {
+    font-size: 30px;
+    font-family: "Open Sans", sans-serif;
+    letter-spacing: 4px;
+    font-weight: 300;
+  }
+}
 
- 
+/*==========Theme Selection Buttons==========
+===============================================*/
+
+#theme-selection {
+  margin: 30px 0;
+  #tooltip {
+    font-size: 16px;
+    padding-right: 30px;
+  }
+
+  button {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    padding: 4px;
+    margin: 7px;
+
+      &:hover {
+        padding: 6px;
+      }
+  }
+}
+#pauseSetting {
+  margin: 30px 0;
+  display: block;
+  &:hover {
+    cursor: pointer;
+  }
+}
+#session, #break {
+  display: grid;
+  grid-template-areas: "label time inc"
+                       "label time dec";
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-rows: 1fr, 1fr; 
+  width: 100%;
+
+  label {
+    grid-area: label;
+    align-self: center;
+    justify-self: start;
+    width: 100%;
+    margin: 10px;
+  }
+  .decrement{
+    grid-area: dec;
+    align-self: start;
+    &:hover {
+      font-size: 25px;
+    }
+  }
+  .length {
+    text-align: center;
+    align-self: center;
+    grid-area: time;
+    font-size: 20px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  .increment {
+    grid-area: inc;
+    align-self: end;
+    font-size: 25px;
+  }
+}

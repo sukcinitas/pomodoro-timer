@@ -6,8 +6,10 @@ const initialState = {
     timerLabel: "session",
     goDisplay: {display: "initial"}, 
     pauseDisplay: {display: "none"},
-    animation: {animation: "blinking2 10000ms infinite"},
-    seconds: 25 * 60 
+    // animation: {animation: "blinking2 10000ms infinite"},
+    animation: {animation: "none"},
+    seconds: 25 * 60,
+    timerLabelDisplay: {visibility: "hidden"}
 };
 
 export default function(state = initialState, action) {

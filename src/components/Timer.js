@@ -42,9 +42,9 @@ class Timer extends React.Component {
     timerGo(){
     //if timer starts going, session and break length selections are not displayed, go button icon is changed by pause icon
         this.interval = setInterval(this.timerTic, 1000);
+        document.querySelector("#timer-label").style.visibility = "visible";
         this.props.toggleGoing({
             timerGoing: !this.props.timerGoing,
-            styles: {display: "none"},
             goDisplay: {display: "none"}, 
             pauseDisplay: {display: "initial"},
             animation: {animation: "blinking 3000ms ease-in-out infinite"}
@@ -53,10 +53,13 @@ class Timer extends React.Component {
      
     timerPause(){
     //pause button icon is changed by go button icon
+        if(this.props.pauseSetting == "disabled") { 
+            return;}
         clearInterval(this.interval);
+        document.querySelector("#timer-label").style.visibility = "visible";
+        document.querySelector("#timer-label").style.animationPlayState = "paused";
         this.props.toggleGoing({
             timerGoing: !this.props.timerGoing,
-            styles: {display: "none"},
             goDisplay: {display: "initial"}, 
             pauseDisplay: {display: "none"},
             animation: {animation: "none"}
@@ -69,11 +72,13 @@ class Timer extends React.Component {
         document.getElementById("beep").load();
         this.props.toggleGoing({
                 timerGoing: false,
-                styles: {},
+                styles: {display: "grid"},
                 goDisplay: {display: "block"}, 
                 pauseDisplay: {display: "none"},
-                animation: {animation: "blinking2 10000ms infinite"}
+                // animation: {animation: "blinking2 10000ms infinite"}
+                animation: {animation: "none"}
         })
+        document.querySelector("#timer-label").style.visibility = "hidden";
         this.props.changeLabel("session");
         this.props.setSeconds(1500);
         this.props.toggleSettingsDisplay(25, 5);
@@ -105,10 +110,10 @@ function mapStateToProps(state) {
         pauseDisplay: state.timer.pauseDisplay,
         timerLabel: state.timer.timerLabel,
         animation: state.timer.animation,
-        styles: state.timer.styles,
         seconds: state.timer.seconds,
         session: state.settings.session,
-        pause: state.settings.pause
+        pause: state.settings.pause,
+        pauseSetting: state.settings.pauseSetting
     };
 }
 
