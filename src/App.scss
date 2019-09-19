@@ -46,7 +46,14 @@ body {
                          ". dec time inc .";
     grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
     grid-template-rows: 1fr, 1fr; 
-
+///////////////////////////////////////////////////////////////////////////////////////
+    &.active {
+      display: "initial";
+    }
+    &.inactive {
+      display:none;
+    }
+//////////////////////////////////////////////////////////////////////
     label {
       grid-area: label;
       text-align: center;

@@ -1,8 +1,11 @@
-//rootReducer
-
 import {combineReducers} from 'redux';
-//import all reducers
+import setTheme from './setTheme';
+import settings from './settings';
+import timer from './timer';
+
 
 export default combineReducers({
-    //all reducers
+    theme: setTheme,
+    settings: settings,
+    timer: timer
 })

@@ -1,13 +1,10 @@
-import SET_THEME from '../actions';
+import { SET_THEME } from '../actions';
 
-const initialState = {
-    theme: initial
-}
 
-export default function(state = initialState, action) {
+export default function(state = "initial", action) {
     switch (action.type) {
         case SET_THEME: {
-            return Object.assign({}, state, {theme: action.theme})
+            return action.theme
         }
         default:
             return state;
