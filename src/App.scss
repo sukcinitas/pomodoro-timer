@@ -1,93 +1,144 @@
-@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto');
 @import url('https://fonts.googleapis.com/css?family=Plaster');
 @import url('https://fonts.googleapis.com/css?family=Cute+Font');
+
 
 * {
   box-sizing: border-box;
 }
+
 html, body {
   padding: 0;
   margin: 0 auto;
 }
 
 body {
- 
-background: #1D976C;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 100%;
+  width :100%;
+}
 
-
-  
-  color: white;
-  background-repeat: no-repeat;
+#root {
   height: 100vh;
-  width:100vw;
+  width: 100vw;
   overflow: auto;
 }
+
+/*=====================Pomodoro Grid=========================
+===============================================================*/
+/*Three grid areas: timer, session, break*/
+
 #pomodoro{
   margin: auto;
-  margin-top: 150px;
-  max-width: 90%;
+  // padding: 150px 10px;
+  padding-top: 100px; //
+  // max-width: 90%;
   display: grid;
   grid-template-rows: auto auto;
   grid-template-columns: 1fr 1fr;
+
+  #session, #break, #timer {
+    font-family:"Cute Font", sans-serif;
+    font-size: 30px;
+  }
+
+  #session, #break {
+    display: grid;
+    grid-template-areas: "label label label label label"
+                         ". dec time inc .";
+    grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
+    grid-template-rows: 1fr, 1fr; 
+///////////////////////////////////////////////////////////////////////////////////////
+    &.active {
+      display: "initial";
+    }
+    &.inactive {
+      display:none;
+    }
+//////////////////////////////////////////////////////////////////////
+    label {
+      grid-area: label;
+      text-align: center;
+    }
+    .decrement{
+      grid-area: dec;
+    }
+    .length {
+      grid-area: time;
+      font-size: 28px;
+      margin: auto;
+      padding: 0;
+    }
+    .increment {
+      grid-area: inc;
+    }
+  }
+
+  #timer {
+    grid-area: 1 / 1 / span 1 / span 2; /* fills full first row out of two in pomodoro grid*/
+    margin: auto;
+    display: grid; /* grid is needed for two headers to come side by side at smaller screens*/
+    grid-template-rows: auto auto;
+    grid-template-rows: 1fr;
+    grid-template-areas: "header time header2";
+    padding-bottom: 100px;
+            
+    #header {
+      // background-image: linear-gradient(to bottom, #93F9B9, #1D976C);
+      // background-clip: text;
+      // color:transparent !important;
+      text-align: left;
+      font-size: 60px;
+      font-family: "Plaster", sans-serif;
+      grid-area: header;
+      margin-right: 30px;
+      // margin-left: -1414px;
+    }
+  
+    #header2 {
+      text-align: right;
+      font-size: 60px;
+      font-family: "Plaster", sans-serif;
+      grid-area: header2;
+      margin-left: 30px;
+      // margin-right: -1270px;
+    }
+  
+    #time-left {
+      grid-area: time;
+      margin: auto;
+  
+        button {
+          width: 50%;
+        }
+
+        p {
+          text-align: center
+        }
+
+        #time-left-label {
+          text-align: center;
+          margin: auto;
+          margin-top: 30px;
+          font-size: 150px;
+        } 
+  
+       #timer-label {
+          font-size: 100px;
+          padding: 0;
+          margin-bottom: 20px;
+          animation: blinking 3000ms ease-in-out infinite;
+          margin-top: -94px;
+          margin-right: -150px;
+          z-index: -99;
+        }
+    } 
+  }
 }
 
-#header {
-  text-align: left;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  grid-area: header;
-  margin-right: 30px;
-}
-#header2 {
-  text-align: right;
-  font-size: 60px;
-  font-family: "Plaster", sans-serif;
-  color: white;
-  grid-area: header2;
-  margin-left: 30px;
-}
+/*==========Shared Properties of Buttons=========
+===================================================*/
 
-#timer {
-  grid-area: 1 / 1 / 1 / span 2;
-  margin: auto;
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-rows: 1fr;
-  grid-template-areas: "header time header2"
-                      
-}
-#session, #break, #timer {
-  font-family:"Cute Font", sans-serif;
-  font-size: 30px;
-}
-#session, #break {
-  display: grid;
-  grid-template-areas: "label label label label label"
-                       ". dec time inc .";
-  grid-template-columns: 7fr 1fr 1fr 1fr 7fr;
-  grid-template-rows: 3fr 3fr; 
-  color: white;
-}
-#session-label, #break-label {
-  grid-area: label;
-  text-align: center;
-}
-#session-decrement, #break-decrement{
-  grid-area: dec;
-}
-#session-length, #break-length {
-  grid-area: time;
-  font-size: 25px;
-}
-#session-increment, #break-increment {
-  grid-area: inc;
-}
 button {
   background: none;
-	color: white;
 	border: none;
 	padding: 0px;
 	font: inherit;
@@ -95,87 +146,158 @@ button {
 	outline: inherit;
   font-size: 25px;
   transition: color 200ms;
-}
-button:hover {
-  color: #D2B0E8;
-  font-size: 28px;
-}
-span {
-  margin: auto;
-  padding: 0;
-}
-p {
-  text-align: center
+
+  &:hover {
+    font-size: 28px;
+  } 
 }
 
-#time-left {
-  grid-area: time;
-  margin: auto;
-  color: #712D9E;
-}
-#time-left button {
-  width: 50%;
-}
-#time-left-label {
-  text-align: center;
-  margin: auto;
-  margin-top: 30px;
-  font-size: 140px;
+/*==========Theme Selection Buttons==========
+===============================================*/
+
+#theme-selection {
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 10px;
+
+  #tooltip {
+    width: 1px;
+    font-size: 14px;
+    padding: 5px;
+    margin: 5px;
+    visibility: hidden;
+  }
+
+  button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    padding: 4px;
+    margin: 5px;
+
+      &:hover {
+        padding: 6px;
+      }
+  }
 }
 
+/*====================Animations=====================
+=======================================================*/
+/*timer label blinking*/
 @keyframes blinking {
-  0% { color: #D2B0E8;}
+  0% { color: #FFF;}
   30% {color: transparent;}
   50% {color: transparent;}
   90% {color: transparent;}
-  100% {color: #D2B0E8;}
+  100% {color: #FFF;}
 }
+
+/*initial blinking params*/
 @keyframes blinking2 {
   0% { color:  transparent;}
   100% {color: transparent;}
 }
-#timer-label {
-  font-size: 100px;
-  margin-bottom: 20px;
-  /*
-  animation: blinking 3000ms ease-in-out infinite;
-  */
-  margin-top: -94px;
-  margin-right: -150px;
-  z-index: -99;
-}
+
+/*===========Media Queries for Smaller Screens============
+============================================================*/
 
 @media (max-width: 970px) {
   #pomodoro {
     grid-template-rows: auto auto;
     grid-template-columns: 1fr 1fr;
     margin-top: 20px;
-  }
-  #timer {
+
+
+    #timer {
     grid-template-rows: auto auto auto;
     grid-template-rows: 1fr;
-    grid-template-areas: "header" 
-                         "header2" 
-                         "time"
+    grid-template-areas: "header" "header2" "time";
+
+      #header, #header2 {
+        font-size: 45px;
+        text-align: center;
+        margin: 0;
+      }
+      #time-left {
+        #timer-label {
+          font-size: 100px;
+          padding: 0;
+          animation: blinking 3000ms ease-in-out infinite;
+          margin-top: -60px;
+          margin-right: 0;
+        }
+      }
+      
+    }
+
+    #session, #break {
+      width: 100%;
+      margin: 0;
+      margin-top: 20px;
+      grid-template-columns: 4fr 1fr 1fr 1fr 4fr;
+    }
   }
-  #header, #header2 {
-    font-size: 45px;
-    text-align: center;
-    margin: 0;
-  }
-  #session, #break {
-    width: 100%;
-    margin: 0;
-    margin-top: 20px;
-    grid-template-columns: 4fr 1fr 1fr 1fr 4fr;
-  }
+  
   #time-left {
     margin-top: 30px;
+    #timer-label {
+      margin: 0px;
+      margin-top: -90px;
+      padding: 0px;
+    }
   }
-  #timer-label {
-    margin: 0px;
-    margin-top: -90px;
-    padding: 0px;
+}
+
+/*===============Toggling Themes================
+==================================================*/
+
+@mixin theme($primary, $secondary, $tertiary, $bg-one, $bg-two) {
+  background: $bg-two;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, $bg-one, $bg-two);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, $bg-one, $bg-two); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: $primary;
+  background-repeat: no-repeat;
+
+  button {
+    color: $primary;
+    &:hover {
+      color:$tertiary;
+    }
   }
+  #root #pomodoro #session, #root #pomodoro #break {
+    color: $primary;
+  }
+  #root #pomodoro #timer {
+    #header, #header2 {
+      color: $primary;
+    }
+    #time-left {
+      color: $secondary;
+    }
+  }
+  #tooltip {
+    color: $bg-two;
+    background-color: $primary;
+  }
+  #theme-selection button {
+    background-color: $primary;
+  }
+}
+
+
+.initial{
+  @include theme(#FFFFFF, #712D9E, #D2B0E8, #93F9B9, #1D976C);
 
 }
+.second {
+  @include theme(#070107, #ffd900, #336611, #9abb4e, #57aa62);
+}
+.third {
+  @include theme(white,#d63f03,#d6be57, #667eea, #764ba2);
+}
+
+
+
+
+ 
