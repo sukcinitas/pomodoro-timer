@@ -1,7 +1,6 @@
 {
   "name": "pomodoro-timer",
   "version": "1.0.0",
-  "description": "",
   "private": true,
   "main": "index.js",
   "scripts": {
@@ -41,5 +40,6 @@
     "react-dom": "^16.9.0",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4"
-  }
+  },
+  "description": ""
 }
